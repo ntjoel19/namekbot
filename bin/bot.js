@@ -66,7 +66,7 @@ app.listen(port, function () {
 	var token = "xoxb-178349180784-xiEocYljowt9DlQLnVeXV8DQ";
 	//var dbPath = process.env.BOT_DB_PATH;
 	var name = "starterbot";
-
+	console.log("is  the bot running?");
 	var slackbot = new SlackBot({
 		token: token,
 		name: name

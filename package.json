@@ -1,0 +1,17 @@
+{
+  "name": "adipst_slackbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "../bin/bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "node-slackr": "^0.1.4",
+    "slackbots": "^0.3.0",
+    "sqlite3": "^3.1.8"
+  }
+}

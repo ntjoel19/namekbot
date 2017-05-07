@@ -54,7 +54,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
 })
 
 app.listen(port, function () {
-	console.log('the server for interactive message in listening on port 3000!');
+	console.log('the server for interactive message in listening on port '+port+'!');
 	/**
 	* Environment variables used to configure the bot:
 	*

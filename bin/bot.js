@@ -12,6 +12,8 @@ var request = require('request')
 var bodyParser = require('body-parser')
 var app = express()
 
+var port = process.env.PORT || 8080;
+
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 app.get('/', (req, res) =>{
@@ -51,7 +53,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
 })
 
-app.listen(PORT, function () {
+app.listen(port, function () {
 	console.log('the server for interactive message in listening on port 3000!');
 	/**
 	* Environment variables used to configure the bot:

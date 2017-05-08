@@ -63,7 +63,7 @@ app.listen(port, function () {
 	*  BOT_DB_PATH: the path of the SQLite database used by the bot
 	*  BOT_NAME: the username you want to give to the bot within your organisation.
 	*/
-	var token = process.env.bot_id_token;
+	var token = process.env.bot_id_token || "xoxb-179778303281-j1o5IqeWzNSJNj73BWeQYNF9";
 	//var dbPath = process.env.BOT_DB_PATH;
 	var name = "starterbot";
 	console.log("is  the bot running?");

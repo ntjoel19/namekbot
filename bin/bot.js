@@ -1,9 +1,8 @@
 'use strict';
 
 /**
- * NorrisBot launcher script.
- *
- * @author Luciano Mammino <lucianomammino@gmail.com>
+ * @author Ntepp Jean Joel
+ * Build a slack bot for AdipsterTech
  */
 
 var SlackBot = require('../lib/slackbot');
@@ -13,6 +12,15 @@ var bodyParser = require('body-parser')
 var app = express()
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
+
+var token = process.env.bot_id_token;
+
+var name = process.env.bot_name;
+console.log("is the bot running?");
+var slackbot = new SlackBot({
+    token: token,
+    name: name
+});
 
 app.get('/', (req, res) =>{
     console.log("you just clicked a button")
@@ -46,11 +54,16 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
     console.log("actionJSONPayLoad = "+JSON.stringify(actionJSONPayload));
     slackbot.actionJSONPayLoad = actionJSONPayload;
-    var forwardedMSG = actionJSONPayload.original_message.text;
-    var start_pos = forwardedMSG.text.indexOf('Notification from <') + 1;
-    var end_pos = forwardedMSG.text.indexOf('|',start_pos);
-    var original_channel = forwardedMSG.text.substring(start_pos,end_pos)
-    slackbot._api('chat.delete', {"token": token, "ts": actionJSONPayLoad.original_message.attachments.ts, "channel": original_channel});
+    if(actionJSONPayload.actions[0].value === "dont_allow"){
+        slackbot.actionJSONPayLoad = actionJSONPayload;
+        var forwardedMSG = self.actionJSONPayload.original_message.text;
+        var start_pos = forwardedMSG.text.indexOf('Notification from <') + 1;
+        var end_pos = forwardedMSG.text.indexOf('|',start_pos);
+        var original_channel = forwardedMSG.text.substring(start_pos,end_pos);
+        console.log("the original channel = "+original_channel);
+        params ={"token": token, "ts": actionJSONPayLoad.original_message.attachments.ts, "channel": original_channel}
+        slackbot.deleteMessage(params);
+    }
     var message = {
         "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].name,
         "replace_original": false
@@ -70,15 +83,5 @@ app.listen(8080, function () {
     *  BOT_NAME: the username you want to give to the bot within your organisation.
     */
 })
-
-
-var token = process.env.bot_id_token;
-
-var name = process.env.bot_name;
-console.log("is the bot running?");
-var slackbot = new SlackBot({
-    token: token,
-    name: name
-});
 
 slackbot.run();

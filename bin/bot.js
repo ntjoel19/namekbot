@@ -68,7 +68,7 @@ app.listen(port, function () {
 var token = process.env.bot_id_token;
 //var dbPath = process.env.BOT_DB_PATH;
 var name = process.env.bot_name;
-console.log("is  the bot running?");
+console.log("The bot name is :"+name+"\n the bot : "+token);
 var slackbot = new SlackBot({
 	token: token,
 	name: name

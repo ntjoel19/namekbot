@@ -45,9 +45,10 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     console.log("you just clicked a button")
     res.status(200).end() // best practice to respond with 200 status
     var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
-    console.log("actionJSONPayLoad = "+JSON.stringify(actionJSONPayload));
+    //console.log("actionJSONPayLoad = "+JSON.stringify(actionJSONPayload));
     slackbot.actionJSONPayLoad = actionJSONPayload;
-    /*
+    
+    console.log("you have clicked on the button "+actionJSONPayload.actions[0].value);
     if(actionJSONPayload.actions[0].value === "dont_allow"){
         slackbot.actionJSONPayLoad = actionJSONPayload;
         var forwardedMSG = self.actionJSONPayload.original_message.text;
@@ -57,9 +58,9 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
         console.log("the original channel = "+original_channel);
         params ={"token": token, "ts": actionJSONPayLoad.original_message.attachments.ts, "channel": original_channel}
         slackbot.deleteMessage(params);
-    }*/
+    }
     var message = {
-        "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].name,
+        "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].value,
         "replace_original": false
     }
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)

@@ -5,6 +5,7 @@
   "main": "bin/bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "--s slackbots",
     "start": "node bin/bot.js"
   },
   "author": "",

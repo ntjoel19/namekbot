@@ -51,7 +51,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     console.log("you have clicked on the button "+actionJSONPayload.actions[0].value);
     if(actionJSONPayload.actions[0].value === "dont_allow"){
         slackbot.actionJSONPayLoad = actionJSONPayload;
-        var forwardedMSG = self.actionJSONPayload.original_message.text;
+        var forwardedMSG = actionJSONPayload.original_message.text;
         var start_pos = forwardedMSG.text.indexOf('Notification from <') + 1;
         var end_pos = forwardedMSG.text.indexOf('|',start_pos);
         var original_channel = forwardedMSG.text.substring(start_pos,end_pos);

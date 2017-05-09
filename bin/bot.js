@@ -65,9 +65,9 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
 })
 
-
-app.listen(8080, function () {
-    console.log('the server for interactive message in listening on port 8080!');
+var port = process.env.PORT || 8080;
+app.listen(port, function () {
+    console.log('the server for interactive message in listening on port '+port+'!');
     /**
     * Environment variables used to configure the bot:
     *

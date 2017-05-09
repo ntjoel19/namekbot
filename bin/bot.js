@@ -46,7 +46,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
 	console.log("you just clicked a button")
     res.status(200).end() // best practice to respond with 200 status
     var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
-    console.log("actionJSONPayLoad = "+actionJSONPayload);
+    console.log("actionJSONPayLoad = "+JSON.stringify(actionJSONPayload))
     var message = {
         "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].name,
         "replace_original": false

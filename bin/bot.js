@@ -37,6 +37,7 @@ function sendMessageToSlackResponseURL(responseURL, JSONmessage){
     request(postOptions, (error, response, body) => {
         if (error){
             // handle errors as you see fit
+            console.log("error "+error)
         }
     })
 }
@@ -56,7 +57,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
         var end_pos = forwardedMSG.indexOf("|",start_pos);
         var original_channel = forwardedMSG.substring(start_pos,end_pos);
         var params ={ts: actionJSONPayload.original_message.attachments.ts, channel: original_channel, as_user: true}
-        slackbot.deleteMessage(params);
+        slackbot._deleteMessage(params);
     }
     var message = {
         "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].value,

@@ -53,8 +53,8 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
         slackbot.actionJSONPayLoad = actionJSONPayload;
         var forwardedMSG = actionJSONPayload.original_message.text;
         console.log("\n"+actionJSONPayload.original_message.text+"\n")
-        var start_pos = forwardedMSG.text.indexOf('<') + 1;
-        var end_pos = forwardedMSG.text.indexOf('|',start_pos);
+        var start_pos = forwardedMSG.text.indexOf("from <") + 1;
+        var end_pos = forwardedMSG.text.indexOf("|",start_pos);
         var original_channel = forwardedMSG.text.substring(start_pos,end_pos);
         console.log("the original channel = "+original_channel);
         params ={"token": token, "ts": actionJSONPayLoad.original_message.attachments.ts, "channel": original_channel}

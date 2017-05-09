@@ -52,6 +52,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     if(actionJSONPayload.actions[0].value === "dont_allow"){
         slackbot.actionJSONPayLoad = actionJSONPayload;
         var forwardedMSG = actionJSONPayload.original_message.text;
+        console.log("\n"+actionJSONPayload.original_message.text+"\n")
         var start_pos = forwardedMSG.text.indexOf('<') + 1;
         var end_pos = forwardedMSG.text.indexOf('|',start_pos);
         var original_channel = forwardedMSG.text.substring(start_pos,end_pos);
@@ -60,7 +61,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
         slackbot.deleteMessage(params);
     }
     var message = {
-        "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].value+"\n"+actionJSONPayload.original_message.text,
+        "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].value,
         "replace_original": false
     }
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)

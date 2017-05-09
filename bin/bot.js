@@ -46,12 +46,13 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
 	console.log("you just clicked a button")
     res.status(200).end() // best practice to respond with 200 status
     var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
+    console.log("actionJSONPayLoad = "+actionJSONPayload);
     var message = {
         "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].name,
         "replace_original": false
     }
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
-})
+});
 
 app.listen(port, function () {
 	console.log('the server for interactive message in listening on port '+port+'!');
@@ -66,9 +67,7 @@ app.listen(port, function () {
 })
 
 var token = process.env.bot_id_token;
-//var dbPath = process.env.BOT_DB_PATH;
 var name = process.env.bot_name;
-console.log("The bot name is :"+name+"\n the bot : "+token);
 var slackbot = new SlackBot({
 	token: token,
 	name: name

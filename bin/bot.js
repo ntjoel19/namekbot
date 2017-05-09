@@ -15,13 +15,6 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var token = process.env.bot_id_token;
 
-var name = process.env.bot_name;
-console.log("is the bot running?");
-var slackbot = new SlackBot({
-    token: token,
-    name: name
-});
-
 app.get('/', (req, res) =>{
     console.log("you just clicked a button")
     res.send("you just clicked a button")
@@ -54,6 +47,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     var actionJSONPayload = JSON.parse(req.body.payload) // parse URL-encoded payload JSON string
     console.log("actionJSONPayLoad = "+JSON.stringify(actionJSONPayload));
     slackbot.actionJSONPayLoad = actionJSONPayload;
+    /*
     if(actionJSONPayload.actions[0].value === "dont_allow"){
         slackbot.actionJSONPayLoad = actionJSONPayload;
         var forwardedMSG = self.actionJSONPayload.original_message.text;
@@ -63,7 +57,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
         console.log("the original channel = "+original_channel);
         params ={"token": token, "ts": actionJSONPayLoad.original_message.attachments.ts, "channel": original_channel}
         slackbot.deleteMessage(params);
-    }
+    }*/
     var message = {
         "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].name,
         "replace_original": false
@@ -83,5 +77,12 @@ app.listen(8080, function () {
     *  BOT_NAME: the username you want to give to the bot within your organisation.
     */
 })
+
+var name = process.env.bot_name;
+console.log("is the bot running?");
+var slackbot = new SlackBot({
+    token: token,
+    name: name
+});
 
 slackbot.run();

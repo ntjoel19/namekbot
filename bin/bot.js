@@ -63,14 +63,15 @@ app.listen(port, function () {
 	*  BOT_DB_PATH: the path of the SQLite database used by the bot
 	*  BOT_NAME: the username you want to give to the bot within your organisation.
 	*/
-	var token = process.env.bot_id_token || "xoxb-179778303281-980tlnBVEUlLghaZiOqcK079";
-	//var dbPath = process.env.BOT_DB_PATH;
-	var name = "starterbot";
-	console.log("is  the bot running?");
-	var slackbot = new SlackBot({
-		token: token,
-		name: name
-	});
-
-	slackbot.run();
 })
+
+var token = process.env.bot_id_token;
+//var dbPath = process.env.BOT_DB_PATH;
+var name = process.env.bot_name;
+console.log("is  the bot running?");
+var slackbot = new SlackBot({
+	token: token,
+	name: name
+});
+
+slackbot.run();

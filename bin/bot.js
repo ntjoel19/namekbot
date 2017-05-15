@@ -59,7 +59,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
         var original_channel = forwardedMSG.substring(start_pos,end_pos);
         //console.log("attachments V payload = "+JSON.stringify(actionJSONPayload.original_message.attachments)+"\n new ts="+actionJSONPayload.original_message.attachments[0].callback_id);
         //var params ={ts: actionJSONPayload.original_message.attachments[0].callback_id, channel: original_channel}
-        var params ={ts: actionJSONPayload.original_message.ts, channel: actionJSONPayload.original_message.channel}
+        var params ={token: my_token, ts: actionJSONPayload.original_message.ts, channel: actionJSONPayload.original_message.channel}
         slackbot.deleteMessage(params);
     }
     var message = {

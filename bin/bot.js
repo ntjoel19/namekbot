@@ -72,7 +72,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
 var name = process.env.bot_name;
 console.log("is the bot running?");
 var slackbot = new SlackBot({
-    token: my_token,
+    token: token,
     name: name
 });
 

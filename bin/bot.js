@@ -14,6 +14,7 @@ var app = express()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 var token = process.env.bot_id_token;
+var my_token = process.env.me_id_token;
 
 app.get('/', (req, res) =>{
     console.log("you just clicked a button")
@@ -71,7 +72,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
 var name = process.env.bot_name;
 console.log("is the bot running?");
 var slackbot = new SlackBot({
-    token: token,
+    token: my_token,
     name: name
 });
 

@@ -74,7 +74,8 @@ var name = process.env.bot_name;
 console.log("is the bot running?");
 var slackbot = new SlackBot({
     token: token,
-    name: name
+    name: name,
+    me_token: my_token
 });
 
 var port = process.env.PORT || 8080;

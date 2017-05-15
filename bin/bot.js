@@ -68,6 +68,13 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
 })
 
+var name = process.env.bot_name;
+console.log("is the bot running?");
+var slackbot = new SlackBot({
+    token: token,
+    name: name
+});
+
 var port = process.env.PORT || 8080;
 app.listen(port, function () {
     console.log('the server for interactive message in listening on port '+port+'!');
@@ -79,13 +86,5 @@ app.listen(port, function () {
     *  BOT_DB_PATH: the path of the SQLite database used by the bot
     *  BOT_NAME: the username you want to give to the bot within your organisation.
     */
+    slackbot.run();
 })
-
-var name = process.env.bot_name;
-console.log("is the bot running?");
-var slackbot = new SlackBot({
-    token: token,
-    name: name
-});
-
-slackbot.run();

@@ -60,8 +60,10 @@ app.post('/buttons-actions', urlencodedParser, (req, res) =>{
         console.log("channel = "+original_channel+"\n"+JSON.stringify(actionJSONPayload.original_message))
         //console.log("attachments V payload = "+JSON.stringify(actionJSONPayload.original_message.attachments)+"\n new ts="+actionJSONPayload.original_message.attachments[0].callback_id);
         var params ={token: my_token, ts: actionJSONPayload.original_message.attachments[0].callback_id, channel: original_channel}
-        //var params ={token: my_token, ts: actionJSONPayload.original_message.ts, channel: original_channel}
+        params2 ={token: token, ts: actionJSONPayload.original_message.ts, channel: actionJSONPayload.channel}
         slackbot.deleteMessage(params);
+        slackbot.deleteMessage(params2);
+
     }
     var message = {
         "text": actionJSONPayload.user.name+" clicked: "+actionJSONPayload.actions[0].value,

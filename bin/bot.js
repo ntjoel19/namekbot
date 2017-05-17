@@ -63,7 +63,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
         slackbot.deleteMessage(params2);
     }
     var message = {
-        "text": forwardedMSG,
+        "text": actionJSONPayload.original_message,
         "replace_original": true
     }
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message);

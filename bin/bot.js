@@ -65,7 +65,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
     }
     var message = {
         "text": actionJSONPayload.user.name + " clicked: " + actionJSONPayload.actions[0].value,
-        "replace_original": false
+        "replace_original": true
     }
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
 })

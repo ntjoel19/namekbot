@@ -63,7 +63,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
         slackbot.deleteMessage(params2);
 
     }
-    var msgAttachment = actionJSONPayLoad.original_message;
+    var msgAttachment = actionJSONPayload.original_message;
     delete msgAttachment.attachments[0].actions;
     msgAttachment.attachments[0][result] = "Message allowed";
     var message = {

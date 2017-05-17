@@ -65,7 +65,7 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
     }
     var msgAttachment = actionJSONPayload.original_message;
     delete msgAttachment.attachments[0].actions;
-    msgAttachment.attachments[0]["footer"] = "Message allowed";
+    msgAttachment["footer"] = "Message allowed";
     console.log(JSON.stringify(msgAttachment));
     var message = {
         "text": msgAttachment,

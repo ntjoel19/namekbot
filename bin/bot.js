@@ -66,12 +66,13 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
     var msgAttachment = actionJSONPayload.original_message;
     delete msgAttachment.attachments[0].actions;
     msgAttachment["footer"] = "Message allowed";
+    msgAttachment["replace_original"] = true;
     console.log(JSON.stringify(msgAttachment));
     var message = {
         "text": msgAttachment,
         "replace_original": true
     }
-    sendMessageToSlackResponseURL(actionJSONPayload.response_url, JSON.stringify(message))
+    sendMessageToSlackResponseURL(actionJSONPayload.response_url, JSON.stringify(msgAttachment))
 })
 
 var name = process.env.bot_name;

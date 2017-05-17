@@ -61,12 +61,13 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
         var params2 = { token: my_token, ts: actionJSONPayload.message_ts, channel: actionJSONPayload.channel.id }
         slackbot.deleteMessage(params);
         slackbot.deleteMessage(params2);
+
     }
     var message = {
-        "text": actionJSONPayload.original_message,
-        "replace_original": true
+        "text": actionJSONPayload.user.name + " clicked: " + actionJSONPayload.actions[0].value,
+        "replace_original": false
     }
-    sendMessageToSlackResponseURL(actionJSONPayload.response_url, message);
+    sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
 })
 
 var name = process.env.bot_name;

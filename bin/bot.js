@@ -67,8 +67,8 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
             "text": forwardedMSG,
             "replace_original": true
         }
+        sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
     }
-    sendMessageToSlackResponseURL(actionJSONPayload.response_url, message)
 })
 
 var name = process.env.bot_name;

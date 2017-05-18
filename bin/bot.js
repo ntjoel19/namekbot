@@ -11,7 +11,7 @@ var request = require('request')
 var bodyParser = require('body-parser')
 var app = express()
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 var token = process.env.bot_id_token;
 var my_token = process.env.me_id_token;
@@ -61,17 +61,13 @@ app.post('/buttons-actions', urlencodedParser, (req, res) => {
         var params2 = { token: my_token, ts: actionJSONPayload.message_ts, channel: actionJSONPayload.channel.id }
         slackbot.deleteMessage(params);
         slackbot.deleteMessage(params2);
-
     }
     var msgAttachment = actionJSONPayload.original_message;
     delete msgAttachment.attachments[0].actions;
     msgAttachment["footer"] = "Message allowed";
     msgAttachment["replace_original"] = true;
     console.log(JSON.stringify(msgAttachment));
-    var message = {
-        "text": msgAttachment,
-        "replace_original": true
-    }
+
     sendMessageToSlackResponseURL(actionJSONPayload.response_url, msgAttachment)
 })
 
